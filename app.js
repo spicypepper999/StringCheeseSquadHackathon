@@ -97,7 +97,8 @@ app.get('/entries', (req, res) => {
 
 app.get('/user', (req, res) => {
     if (req.session.currentUser) {
-        res.render('user', {user:req.session.currentUser});
+        Entry.find({ username: req.session.currentUser.username, date:{ $gte: new Date(2024, 1, 1),
+            $lte: new Date(2024, 2, 0)} }).then(data=>res.render('user', {user:req.session.currentUser, entries:data}));
     } else {
         res.redirect('login');
     }
