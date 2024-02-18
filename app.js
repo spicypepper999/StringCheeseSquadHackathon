@@ -62,8 +62,8 @@ app.get("/about", (req, res) => {
 
 app.get('/test', (req, res) => {
     const newUser = new User({
-        username: "User Name",
-        password: "User password",
+        username: "user",
+        password: "password",
         id: uuidv4()
     });
     User.create(newUser);
@@ -140,5 +140,13 @@ app.post('/entry', (req, res) => {
         Entry.create(newEntry).then(res.redirect('user'));
     } else {
         res.redirect('/login')
+    }
+});
+
+app.get('/register', (req, res) => {
+    if (!req.session.currentUser) {
+        res.render('register');
+    } else {
+        res.redirect('logout');
     }
 });
