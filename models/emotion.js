@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const emotionSchema = new Schema({
     name: String,
+    rating: Number,
     color: String
 });
 

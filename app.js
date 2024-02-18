@@ -41,18 +41,6 @@ mongoose.connect(uri)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error(err));
 
-let allEmotions;
-
-Emotion.find({}).then(data => {allEmotions = data});
-
-  const newEntry1 = new Entry({
-    name: "Today was an excellent day",
-    text: "I ate ice cream at ferdinands and met up with a friend",
-    date: new Date(2024, 1, 3),
-    emotions: []
-});
-
-
 app.listen(port, () => {
     console.log("LISTENING ON PORT " + port);
 });
@@ -146,6 +134,21 @@ app.get('/', (req, res) => {
 
 app.get("/about", (req, res) => {
     res.render("about");
+});
+
+app.get('/test', (req, res) => {
+    const newUser = new User({
+        username: "user",
+        password: "password",
+        id: uuidv4()
+    });
+    User.create(newUser);
+    res.send("Hello");
+});
+
+app.get('/testentry', (req, res) => {
+    Entry.create(newEntry1);
+    res.send("Hello");
 });
 
 app.get('/login', (req, res) => {
