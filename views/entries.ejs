@@ -7,6 +7,8 @@
     <%- include('partials/userbar') %>
     <h1><%= user.username %></h1>
     <% for(let entry of entries){ %>
+        <div class="container"><img src="\assets\thought.png" alt="" style="width:75%">
+            <div class="bubbletext">
         <h2><%= entry.name %></h2>
         <p><%= entry.date %></p>
         <p><%= entry.text %></p>
@@ -14,8 +16,10 @@
         <% for(let emotion of entry.emotions){ %>
         <i style="background-color:<%=emotion.color%>;"><%= emotion.name %> </i>
         <% } %>
+            </div>
         <br>
         <br>
+        </div>
     <%} %>
 </body>
 </html>
