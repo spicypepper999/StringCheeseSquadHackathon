@@ -27,6 +27,8 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
+app.use(express.static(path.join(__dirname, 'stylesheets')))
+
 const uri = "mongodb+srv://cougar:7l6AquytiUnbvq1J@couglife.jj8trpx.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(uri);
 
@@ -38,6 +40,10 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
     res.render('index');
 });
+
+app.get('/about', (req, res) => {
+    res.render('about');
+   });
 
 app.get('/test', (req, res) => {
     const newUser = new User({
