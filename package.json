@@ -9,9 +9,8 @@
     "mongoose": "^8.1.3",
     "uuid": "^9.0.1"
   },
-  "scripts":{
-    "dev" : "nodemon app.js",
-    "start" : "node app.js"
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   }
-
 }

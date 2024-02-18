@@ -1,8 +1,17 @@
 <html>
 <head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
     <title>User</title>
 </head>
 <body>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/entry">New Entry</a></li>
+        <li><a href="/user">My Entries</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/register">Register</a></li>
+        <li id="user"><a href="/user"><img src="\assets\defaultpfp.jpg" alt=""></a></li>
+      </ul>
     <h1><%= user.username %></h1>
     <% for(let entry of entries){ %>
         <h2><%= entry.name %></h2>

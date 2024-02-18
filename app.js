@@ -32,7 +32,9 @@ session.currentUser = null;
 //app.use(express.static(path.join(__dirname, 'stylesheets')))
 
 const uri = "mongodb+srv://cougar:7l6AquytiUnbvq1J@couglife.jj8trpx.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri);
+mongoose.connect(uri)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error(err));
 
 const newEmotion = new Emotion({
     name: "Anger",
@@ -62,8 +64,8 @@ app.get("/about", (req, res) => {
 
 app.get('/test', (req, res) => {
     const newUser = new User({
-        username: "User Name",
-        password: "User password",
+        username: "user",
+        password: "password",
         id: uuidv4()
     });
     User.create(newUser);
@@ -141,4 +143,27 @@ app.post('/entry', (req, res) => {
     } else {
         res.redirect('/login')
     }
+});
+
+app.get('/register', (req, res) => {
+    if (!req.session.currentUser) {
+        res.render('register');
+    } else {
+        res.redirect('logout');
+    }
+});
+
+app.post('/register', (req, res) => {
+    const newUser = new User({
+        username: req.body.username,
+        password: req.body.password,
+        id: uuidv4()
+    });
+    User.findOne({ username: newUser.username }).then(data => {
+        if (data) {
+            res.redirect('/register')
+        } else {
+            User.create(newUser).then(res.redirect('/login'));
+        }
+    });
 });
