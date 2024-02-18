@@ -189,9 +189,12 @@ app.post('/logout', (req, res) => {
     res.redirect('login');
 });
 
+const sortByDate = (data) => 
+  data.sort(({date: a}, {date: b}) => a > b ? -1 : a < b ? 1 : 0)
+
 app.get('/entries', (req, res) => {
     if(req.session.currentUser){
-        Entry.find({ username: req.session.currentUser.username }).then(data => res.render('entries', {user:req.session.currentUser, entries:data}));
+        Entry.find({ username: req.session.currentUser.username }).then(data => res.render('entries', {user:req.session.currentUser, entries:sortByDate(data)}));
     }else{
         res.redirect('login');
     }

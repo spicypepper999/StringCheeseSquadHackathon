@@ -43,7 +43,7 @@ entries.forEach(entry => {
 
 for (let i = 1; i <= 29; i++) {
     if(entriesByDay[i]) {
-        %><li><%for(let emotion of entriesByDay[i]){%><span style="background-color: <%=emotion.color%>;"><%=emotion.name%></span> <%}%></li><%
+        %><li><%for(let emotion of entriesByDay[i]){%><span class="calendarelement" style="background-color: <%=emotion.color%>;"><%=emotion.name%></span> <%}%></li><%
     } else {
         // If there's no entry for this day
         %><li><%=i%> </li><%
@@ -51,5 +51,6 @@ for (let i = 1; i <= 29; i++) {
 }
 %>
       </ul>
+      <p><b>Legend</b>: Sadness: <inline style="background-color:blue">!!!</inline>, Anger: <inline style="background-color:red">!!!</inline>, Excitement: <inline style="background-color:orange">!!!</inline>, Nervousness: <inline style="background-color:yellow">!!!</inline>, Frustration: <inline style="background-color:pink">!!!</inline>, Confusion: <inline style="background-color:red">!!!</inline>, Happiness: <inline style="background-color:green">!!!</inline></p>
 </body>
 </html>
