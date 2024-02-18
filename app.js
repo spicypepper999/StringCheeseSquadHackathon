@@ -32,7 +32,9 @@ session.currentUser = null;
 //app.use(express.static(path.join(__dirname, 'stylesheets')))
 
 const uri = "mongodb+srv://cougar:7l6AquytiUnbvq1J@couglife.jj8trpx.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri);
+mongoose.connect(uri)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error(err));
 
 const newEmotion = new Emotion({
     name: "Anger",
