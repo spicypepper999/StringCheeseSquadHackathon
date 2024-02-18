@@ -13,13 +13,20 @@
         <li id="user"><a href="/user"><img src="\assets\defaultpfp.jpg" alt=""></a></li>
       </ul>
     <h1><%= user.username %></h1>
+    
     <% for(let entry of entries){ %>
+        <div class="container"><img src="\assets\thought.png" alt="">
+            <div class="bubbletext">
         <h2><%= entry.name %></h2>
         <p><%= entry.text %></p>
         <b><p><%= entry.username %></p></b>
-        <i><%= entry.emotions[0].name %></i>
+        <% for(let emotion of entry.emotions){ %>
+        <i style="background-color:<%=emotion.color%>;"><%= emotion.name %> </i>
+        <%} %>
+        </div>
         <br>
         <br>
+    </div>
     <%} %>
 </body>
 </html>
