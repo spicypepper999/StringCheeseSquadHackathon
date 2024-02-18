@@ -17,7 +17,9 @@
         <h2><%= entry.name %></h2>
         <p><%= entry.text %></p>
         <b><p><%= entry.username %></p></b>
-        <i><%= entry.emotions[0].name %></i>
+        <% for(let emotion of entry.emotions){ %>
+        <i style="background-color:<%=emotion.color%>;"><%= emotion.name %> </i>
+        <% } %>
         <br>
         <br>
     <%} %>

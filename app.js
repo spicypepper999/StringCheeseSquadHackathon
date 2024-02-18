@@ -36,19 +36,6 @@ mongoose.connect(uri)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error(err));
 
-const newEmotion = new Emotion({
-    name: "Anger",
-    rating: 5,
-    color: "Red"
-});
-
-const newEntry1 = new Entry({
-    name: "It was a good day",
-    text: "Didn't even have to use my AK",
-    username: "msha",
-    emotions: [newEmotion]
-});
-
 app.listen(port, () => {
     console.log("LISTENING ON PORT " + port);
 });
@@ -60,21 +47,6 @@ app.get('/', (req, res) => {
 
 app.get("/about", (req, res) => {
     res.render("about");
-});
-
-app.get('/test', (req, res) => {
-    const newUser = new User({
-        username: "user",
-        password: "password",
-        id: uuidv4()
-    });
-    User.create(newUser);
-    res.send("Hello");
-});
-
-app.get('/testentry', (req, res) => {
-    Entry.create(newEntry1);
-    res.send("Hello");
 });
 
 app.get('/login', (req, res) => {
@@ -125,19 +97,23 @@ app.get('/user', (req, res) => {
 
 app.get('/entry', (req, res) => {
     if (req.session.currentUser) {
-        res.render('entry');
+        Emotion.find({}).then(data => res.render('entry', {emotions:data}));
     } else {
         res.redirect('login');
     }
 });
 
-app.post('/entry', (req, res) => {
+app.post('/entry', async (req, res) => {
     if (req.session.currentUser) {
+        const emotions = [];
+        for (let emotion of req.body.emotions){
+            emotions.push(await Emotion.findOne({name:emotion}));
+        }
         const newEntry = new Entry({
             name: req.body.entryName,
             text: req.body.entryText,
             username: req.session.currentUser.username,
-            emotions: newEmotion
+            emotions: emotions
         });
         Entry.create(newEntry).then(res.redirect('user'));
     } else {

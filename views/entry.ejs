@@ -19,6 +19,11 @@
             <input type="text" name="entryName">
             <label for="entryText">Enter Entry Text:</label>
             <input type="text" name="entryText">
+
+            <% for(let emotion of emotions){ %>
+            <input type="checkbox" id="<%=emotion.name%>" name="emotions" value="<%=emotion.name%>">
+            <label for="<%=emotion.name%>"><%=emotion.name%></label>
+                <% } %>
             <button type="submit">SUBMIT</button>
         </form>
     </fieldset>
