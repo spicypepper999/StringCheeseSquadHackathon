@@ -41,9 +41,9 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/about', (req, res) => {
-    res.render('about');
-   });
+app.get("/about", (req, res) => {
+    res.render("about");
+  });
 
 app.get('/test', (req, res) => {
     const newUser = new User({
