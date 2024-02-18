@@ -36,6 +36,33 @@ body {
     animation: moveLeft 1.5s ease-in;
   }
 
+  h2 {
+    font-family: Arial;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-left: 20px;
+    font-size: 60px;
+    animation: moveLeft 1.5s ease-in;
+  }
+
+  a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+  h3 {
+    font-family: Arial;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-left: 20px;
+    font-size: 60px;
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    background-color: #3a3a3a;
+  }
+
   @keyframes moveLeft {
     0%{
       opacity: 0;
