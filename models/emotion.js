@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const emotionSchema = new Schema({
-    comment: String,
-    username: String,
-    id: String
+    name: String,
+    rating: Number,
+    color: String
 });
 
-module.exports = mongoose.model('Emotion', emotionSchema);
+module.exports = {Emotion: mongoose.model('Emotion', emotionSchema), emotionSchema:emotionSchema};

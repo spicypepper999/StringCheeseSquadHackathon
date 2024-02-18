@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>User</title>
+</head>
+<body>
+    <h1><%= user.username %></h1>
+    <% for(let entry of entries){ %>
+        <h2><%= entry.name %></h2>
+        <p><%= entry.text %></p>
+        <b><p><%= entry.username %></p></b>
+        <i><%= entry.emotions[0].name %></i>
+        <br>
+        <br>
+    <%} %>
+</body>
+</html>
