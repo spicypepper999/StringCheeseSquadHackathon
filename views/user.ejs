@@ -1,27 +1,85 @@
 <html>
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
-    <title>User</title>
+    <link rel="stylesheet" href="/stylesheets/stylesCalendar.css">
+    <title>User page</title>
 </head>
 <body>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/entry">New Entry</a></li>
-        <li><a href="/user">My Entries</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/register">Register</a></li>
-        <li id="user"><a href="/user"><img src="\assets\defaultpfp.jpg" alt=""></a></li>
+    <%- include('partials/userbar') %>
+    <p>Page for <%=user.username%></p>
+    <div class="month">
+        <ul>
+          <li class="prev">&#10094;</li>
+          <li class="next">&#10095;</li>
+          <li>February<br><span style="font-size:18px">2021</span></li>
+        </ul>
+      </div>
+      
+      <ul class="weekdays">
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
       </ul>
-    <h1><%= user.username %></h1>
-    <% for(let entry of entries){ %>
-        <h2><%= entry.name %></h2>
-        <p><%= entry.text %></p>
-        <b><p><%= entry.username %></p></b>
-        <% for(let emotion of entry.emotions){ %>
-        <i style="background-color:<%=emotion.color%>;"><%= emotion.name %> </i>
-        <% } %>
-        <br>
-        <br>
-    <%} %>
+      
+      <ul class="days">
+        <li></li>
+        <li></li>
+        <li></li>
+        <%
+let entriesByDay = {};
+// Organize entries by day of the month, storing colors for each day
+entries.forEach(entry => {
+    let day = entry.date.getDate();
+    if (!entriesByDay[day]) {
+        entriesByDay[day] = []; // Initialize the array if it doesn't exist
+    }
+    // Add the color of the current entry to the day's array
+    entriesByDay[day].push(entry.color);
+});
+
+for (let i = 1; i <= 29; i++) {
+    if(entriesByDay[i]) {
+        let colors = entriesByDay[i];
+        %><li><%= colors %></li><%
+    } else {
+        // If there's no entry for this day
+        %><li><%=i%></li><%
+    }
+}
+%>
+        <!-- <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li><span class="active">18</span></li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li> -->
+      </ul>
 </body>
 </html>
