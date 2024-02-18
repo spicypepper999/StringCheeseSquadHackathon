@@ -6,6 +6,7 @@ const entrySchema = new Schema({
     name: String,
     text: String,
     username: String,
+    date: Date,
     emotions: [Emotion.emotionSchema]
 });
 

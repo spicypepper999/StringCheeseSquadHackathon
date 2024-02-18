@@ -1,0 +1,21 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <title>User</title>
+</head>
+<body>
+    <%- include('partials/userbar') %>
+    <h1><%= user.username %></h1>
+    <% for(let entry of entries){ %>
+        <h2><%= entry.name %></h2>
+        <p><%= entry.date %></p>
+        <p><%= entry.text %></p>
+        <b><p><%= entry.username %></p></b>
+        <% for(let emotion of entry.emotions){ %>
+        <i style="background-color:<%=emotion.color%>;"><%= emotion.name %> </i>
+        <% } %>
+        <br>
+        <br>
+    <%} %>
+</body>
+</html>

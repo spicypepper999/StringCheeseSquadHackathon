@@ -87,23 +87,31 @@ app.post('/logout', (req, res) => {
     res.redirect('login');
 });
 
-app.get('/user', (req, res) => {
+app.get('/entries', (req, res) => {
     if(req.session.currentUser){
-        Entry.find({ username: req.session.currentUser.username }).then(data => res.render('user', {user:req.session.currentUser, entries:data}));
+        Entry.find({ username: req.session.currentUser.username }).then(data => res.render('entries', {user:req.session.currentUser, entries:data}));
     }else{
         res.redirect('login');
     }
 });
 
-app.get('/entry', (req, res) => {
+app.get('/user', (req, res) => {
     if (req.session.currentUser) {
-        Emotion.find({}).then(data => res.render('entry', {emotions:data}));
+        res.render('user', {user:req.session.currentUser});
     } else {
         res.redirect('login');
     }
 });
 
-app.post('/entry', async (req, res) => {
+app.get('/entries/new', (req, res) => {
+    if (req.session.currentUser) {
+        Emotion.find({}).then(data => res.render('newentry', {emotions:data}));
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.post('/entries/new', async (req, res) => {
     if (req.session.currentUser) {
         const emotions = [];
         for (let emotion of req.body.emotions){
@@ -113,9 +121,10 @@ app.post('/entry', async (req, res) => {
             name: req.body.entryName,
             text: req.body.entryText,
             username: req.session.currentUser.username,
+            date: new Date(),
             emotions: emotions
         });
-        Entry.create(newEntry).then(res.redirect('user'));
+        Entry.create(newEntry).then(res.redirect('/entries'));
     } else {
         res.redirect('/login')
     }
