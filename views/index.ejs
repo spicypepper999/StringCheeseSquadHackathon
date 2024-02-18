@@ -4,16 +4,9 @@
     <title>CougLife</title>
 </head>
 <body>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/entry">New Entry</a></li>
-        <li><a href="/user">My Entries</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/register">Register</a></li>
-        <li id="user"><a href="/user"><img src="\assets\defaultpfp.jpg" alt=""></a></li>
-      </ul>
+    <%- include('partials/userbar') %>
     <h1>Welcome to CougLife!</h1>
     <h2>Enter a new entry in your journal</h2>
-    <h3><a href="/user">Go</a></h3>
+    <h3><a href="/entries/new">Go</a></h3>
 </body>
 </html>
