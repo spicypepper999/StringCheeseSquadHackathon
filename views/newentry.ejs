@@ -1,23 +1,47 @@
 <html>
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/stylesheets/styles.css">
     <title>New entry</title>
 </head>
 <body>
     <%- include('partials/userbar') %>
-    <fieldset>
-        <legend>NEW ENTRY</legend>
-        <form action="/entries/new" method="post">
-            <label for="entryName">Enter Entry Name:</label>
-            <input type="text" name="entryName">
-            <label for="entryText">Enter Entry Text:</label>
-            <input type="text" name="entryText">
-            <% for(let emotion of emotions){ %>
-                <input type="checkbox" id="<%=emotion.name%>" name="emotions" value="<%=emotion.name%>">
-                <label for="<%=emotion.name%>"><%=emotion.name%></label>
-                    <% } %>
-            <button type="submit">SUBMIT</button>
-        </form>
-    </fieldset>
+
+    <a href="/"><h1 class="login_header">NEW ENTRY</h1></a>
+    <div class="container-entry">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card-entry">
+                <div class="card-header">
+                    <h3>Enter Your Mood</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/entries/new" method="post">
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" placeholder="Entry Name" name="entryName">
+                        </div>
+                        <div class="input-group form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Entry Text"  name="entryText"></textarea>
+                        </div>
+                        <% for(let emotion of emotions){ %>
+                            <input type="checkbox" id="<%=emotion.name%>" name="emotions" value="<%=emotion.name%>">
+                            <label for="<%=emotion.name%>"><%=emotion.name%></label>
+                                <% } %>
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
