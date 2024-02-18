@@ -152,3 +152,18 @@ app.get('/register', (req, res) => {
         res.redirect('logout');
     }
 });
+
+app.post('/register', (req, res) => {
+    const newUser = new User({
+        username: req.body.username,
+        password: req.body.password,
+        id: uuidv4()
+    });
+    User.findOne({ username: newUser.username }).then(data => {
+        if (data) {
+            res.redirect('/register')
+        } else {
+            User.create(newUser).then(res.redirect('/login'));
+        }
+    });
+});
