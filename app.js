@@ -27,7 +27,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
-app.use(express.static(path.join(__dirname, 'stylesheets')))
+session.currentUser = null;
+
+//app.use(express.static(path.join(__dirname, 'stylesheets')))
 
 const uri = "mongodb+srv://cougar:7l6AquytiUnbvq1J@couglife.jj8trpx.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(uri);
@@ -53,4 +55,46 @@ app.get('/test', (req, res) => {
     });
     User.create(newUser);
     res.send("Hello");
+});
+
+app.get('/user', (req, res) => {
+
+});
+
+app.get('/login', (req, res) => {
+    if (!req.session.currentUser) {
+        res.render('login');
+    } else {
+        res.redirect('/logout');
+    }
+});
+
+app.post('/login', (req, res) => {
+    const tryUser = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+    User.findOne({ username: tryUser.username }).then(data => {
+        if (data && data.password == tryUser.password) {
+            req.session.currentUser = tryUser;
+            res.redirect('/');
+        } else {
+            res.redirect('/login');
+        }
+    });
+});
+
+app.get('/logout', (req, res) => {
+    if (req.session.currentUser) {
+        res.render('logout');
+    } else {
+        res.redirect('login');
+    }
+});
+
+app.post('/logout', (req, res) => {
+    if (req.session.currentUser) {
+        req.session.currentUser = null;
+    }
+    res.redirect('/login');
 });
